@@ -25,5 +25,8 @@
     "eslint": "8.18.0",
     "eslint-config-next": "12.1.6",
     "typescript": "4.7.4"
-  }
+  },
+  "main": "index.js",
+  "repository": "git@github.com:wwchacalww/next_sorvetes.git",
+  "author": "Vicente Cartaxo <juniorcartaxo@gmail.com>"
 }
