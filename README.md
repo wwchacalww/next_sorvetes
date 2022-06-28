@@ -4,4 +4,5 @@
 ## Cofigurando o Projeto
 - [X] Instalar o NextJS
 - [X] Componente Header
-- [ ] Componente Sidebar
+- [X] Componente Sidebar
+- [X] Checkout estrutura
