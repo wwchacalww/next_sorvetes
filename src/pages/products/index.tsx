@@ -16,6 +16,7 @@ import {
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import { RiAddLine } from "react-icons/ri";
+import Pagination from "../../components/Pagination";
 
 interface ProductProps {
   name: string;
@@ -111,22 +112,24 @@ export default function ProductsList() {
 
           <Table colorScheme="whiteAlpha" color="whiteAlpha.700">
             <Thead>
-              <Th w="400px" color="whiteAlpha.800">
-                Produto
-              </Th>
-              <Th w={48} color="whiteAlpha.800">
-                Categoria
-              </Th>
-              <Th w={48} color="whiteAlpha.800">
-                Código de Barra
-              </Th>
-              <Th w={40} textAlign="center" color="whiteAlpha.800">
-                Código Simples
-              </Th>
+              <Tr>
+                <Th w="400px" color="whiteAlpha.800">
+                  Produto
+                </Th>
+                <Th w={48} color="whiteAlpha.800">
+                  Categoria
+                </Th>
+                <Th w={48} color="whiteAlpha.800">
+                  Código de Barra
+                </Th>
+                <Th w={40} textAlign="center" color="whiteAlpha.800">
+                  Código Simples
+                </Th>
+              </Tr>
             </Thead>
             <Tbody>
               {items.map((item, index) => (
-                <Tr key="index">
+                <Tr key={index}>
                   <Td w="340px">
                     <Box>
                       <Text fontWeight="bold">{item.name}</Text>
@@ -140,6 +143,7 @@ export default function ProductsList() {
               ))}
             </Tbody>
           </Table>
+          <Pagination />
         </Box>
       </Flex>
     </Box>
