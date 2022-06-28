@@ -6,3 +6,8 @@
 - [X] Componente Header
 - [X] Componente Sidebar
 - [X] Checkout estrutura
+
+## Registro de Produtos
+- [X] Página: Lista de produtos
+- [ ] Criação do componente de paginação
+- [ ] Página: form de criação de produtos
