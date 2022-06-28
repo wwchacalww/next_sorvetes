@@ -22,14 +22,14 @@ export default function Input({ name, label, ...rest }: InputProps) {
         name="name"
         id="name"
         focusBorderColor="purple.500"
-        bg="green.900"
+        bg="green.50"
         variant="filled"
-        color="white"
+        color="green.700"
         _hover={{
-          bgColor: "green.900",
+          bgColor: "green.50",
         }}
         _focus={{
-          bgColor: "green.900",
+          bgColor: "green.50",
         }}
         {...rest}
       />

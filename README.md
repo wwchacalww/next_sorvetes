@@ -10,4 +10,4 @@
 ## Registro de Produtos
 - [X] Página: Lista de produtos
 - [X] Criação do componente de paginação
-- [ ] Página: form de criação de produtos
+- [X] Página: form de criação de produtos
