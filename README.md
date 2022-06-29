@@ -14,11 +14,10 @@
 
 ## Responsividade
 - [X] Separando componentes
-- [ ] Responsividade no Chakra
-- [ ] Header responsivo
-- [ ] Sidebar responsivo
-- [ ] Dashboar responsivo
-- [ ] Listagem responsiva
-- [ ] Cadastro responsivo
+- [X] Responsividade no Chakra
+- [X] Header responsivo
+- [X] Sidebar responsivo
+- [X] Dashboar responsivo
+- [X] Cadastro responsivo
 - [ ] Fluxo de navegação
 - [ ] Sinalizando link ativo

@@ -23,10 +23,10 @@ export default function ProductCreate() {
   return (
     <Box>
       <Header />
-      <Flex w="100%" mx="auto" my="6" maxWidth="1480px">
+      <Flex w="100%" mx="auto" my="6" maxWidth="1480px" px="6">
         <Sidebar />
 
-        <Box flex="1" bg="green.900" p="8" borderRadius="8">
+        <Box flex="1" bg="green.900" p={["6", "8"]} borderRadius="8">
           <Flex justify="space-between" align="center">
             <Heading color="green.50" size="lg" fontWeight="normal">
               Novo Produto
@@ -34,12 +34,12 @@ export default function ProductCreate() {
           </Flex>
           <Divider my="4" borderColor="green.700" />
 
-          <VStack spacing={8}>
-            <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
+          <VStack spacing={["6", "8"]}>
+            <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <Input name="name" type="text" label="Nome do Produto" />
               <Input name="category" type="text" label="Tipo do Produto" />
             </SimpleGrid>
-            <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
+            <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <Input
                 name="description"
                 type="text"
@@ -47,7 +47,7 @@ export default function ProductCreate() {
               />
               <Input name="barcode" type="text" label="Código de barra" />
             </SimpleGrid>
-            <SimpleGrid minChildWidth="240px" spacing="8" w="100%">
+            <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <FormControl>
                 <FormLabel htmlFor="price" color="white">
                   Preço
