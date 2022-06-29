@@ -11,3 +11,14 @@
 - [X] Página: Lista de produtos
 - [X] Criação do componente de paginação
 - [X] Página: form de criação de produtos
+
+## Responsividade
+- [X] Separando componentes
+- [ ] Responsividade no Chakra
+- [ ] Header responsivo
+- [ ] Sidebar responsivo
+- [ ] Dashboar responsivo
+- [ ] Listagem responsiva
+- [ ] Cadastro responsivo
+- [ ] Fluxo de navegação
+- [ ] Sinalizando link ativo
