@@ -17,6 +17,7 @@ import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import { RiAddLine } from "react-icons/ri";
 import Pagination from "../../components/Pagination";
+import Link from "next/link";
 
 interface ProductProps {
   name: string;
@@ -98,15 +99,18 @@ export default function ProductsList() {
             <Heading color="green.50" size="lg" fontWeight="normal">
               Produtos
             </Heading>
-            <Button
-              as="a"
-              size="sm"
-              fontSize="sm"
-              colorScheme="orange"
-              leftIcon={<Icon as={RiAddLine} fontSize="20" />}
-            >
-              Criar novo
-            </Button>
+
+            <Link href="/products/create" passHref>
+              <Button
+                as="a"
+                size="sm"
+                fontSize="sm"
+                colorScheme="orange"
+                leftIcon={<Icon as={RiAddLine} fontSize="20" />}
+              >
+                Criar novo
+              </Button>
+            </Link>
           </Flex>
           <Divider my="4" borderColor="green.700" />
 
