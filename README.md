@@ -19,5 +19,5 @@
 - [X] Sidebar responsivo
 - [X] Dashboar responsivo
 - [X] Cadastro responsivo
-- [ ] Fluxo de navegação
-- [ ] Sinalizando link ativo
+- [X] Fluxo de navegação
+- [X] Sinalizando link ativo

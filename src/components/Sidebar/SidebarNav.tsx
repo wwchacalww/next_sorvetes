@@ -16,20 +16,36 @@ export function SidebarNav() {
   return (
     <Stack spacing={12} align="flex-start">
       <NavSection title="PRODUTOS">
-        <NavLink icon={FaFolderPlus}>Registrar</NavLink>
-        <NavLink icon={FaListAlt}>Listar</NavLink>
-        <NavLink icon={FaCartPlus}>Lista de Compras</NavLink>
+        <NavLink href="/products/create" icon={FaFolderPlus}>
+          Registrar
+        </NavLink>
+        <NavLink href="/products" icon={FaListAlt}>
+          Listar
+        </NavLink>
+        <NavLink href="/products" icon={FaCartPlus}>
+          Lista de Compras
+        </NavLink>
       </NavSection>
 
       <NavSection title="ESTOQUE">
-        <NavLink icon={FaBuilding}>Atual</NavLink>
-        <NavLink icon={FaCalendarAlt}>Fluxo Mensal</NavLink>
-        <NavLink icon={FaBatteryQuarter}>Em Falta</NavLink>
+        <NavLink href="/dashboard" icon={FaBuilding}>
+          Atual
+        </NavLink>
+        <NavLink href="/dashboard" icon={FaCalendarAlt}>
+          Fluxo Mensal
+        </NavLink>
+        <NavLink href="/dashboard" icon={FaBatteryQuarter}>
+          Em Falta
+        </NavLink>
       </NavSection>
 
       <NavSection title="RELATÓRIOS">
-        <NavLink icon={FaCashRegister}>Caixa</NavLink>
-        <NavLink icon={FaSortNumericUp}>Mais Vendidos</NavLink>
+        <NavLink href="/dashboard" icon={FaCashRegister}>
+          Caixa
+        </NavLink>
+        <NavLink href="/dashboard" icon={FaSortNumericUp}>
+          Mais Vendidos
+        </NavLink>
       </NavSection>
     </Stack>
   );
