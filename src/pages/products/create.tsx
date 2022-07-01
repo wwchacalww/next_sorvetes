@@ -16,18 +16,59 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import Link from "next/link";
-import Input from "../../components/Form/Input";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { Input } from "../../components/Form/Input";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 
+type CreateProductFormData = {
+  name: string;
+  category: string;
+  description: string;
+  barcode?: string;
+  code: string;
+  price: number;
+};
+
+const createProductFormSchema = yup.object().shape({
+  name: yup.string().required("Nome do produto é obrigatório"),
+  category: yup.string().required("Tipo do produto é obrigatória"),
+  description: yup.string().required("Descrição do produto é obrigatória"),
+  barcode: yup.string(),
+  code: yup
+    .string()
+    .max(10, "O Código do produto deve ter no máximo 10 caracteres")
+    .required("Código do produto é obrigatório"),
+});
+
 export default function ProductCreate() {
+  const { register, handleSubmit, formState } = useForm({
+    resolver: yupResolver(createProductFormSchema),
+  });
+
+  const { errors } = formState;
+
+  const handleCreate: SubmitHandler<CreateProductFormData> = async (values) => {
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+    console.log(values);
+  };
+
   return (
     <Box>
       <Header />
       <Flex w="100%" mx="auto" my="6" maxWidth="1480px" px="6">
         <Sidebar />
 
-        <Box flex="1" bg="green.900" p={["6", "8"]} borderRadius="8">
+        <Box
+          as="form"
+          flex="1"
+          bg="green.900"
+          p={["6", "8"]}
+          borderRadius="8"
+          onSubmit={handleSubmit(handleCreate as any)}
+        >
           <Flex justify="space-between" align="center">
             <Heading color="green.50" size="lg" fontWeight="normal">
               Novo Produto
@@ -37,16 +78,32 @@ export default function ProductCreate() {
 
           <VStack spacing={["6", "8"]}>
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
-              <Input name="name" type="text" label="Nome do Produto" />
-              <Input name="category" type="text" label="Tipo do Produto" />
+              <Input
+                type="text"
+                label="Nome do Produto"
+                error={errors.name as any}
+                {...register("name")}
+              />
+              <Input
+                type="text"
+                label="Tipo do Produto"
+                error={errors.category as any}
+                {...register("category")}
+              />
             </SimpleGrid>
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <Input
-                name="description"
                 type="text"
                 label="Descrição do Produto"
+                error={errors.description as any}
+                {...register("description")}
               />
-              <Input name="barcode" type="text" label="Código de barra" />
+              <Input
+                type="text"
+                label="Código de barra"
+                error={errors.barcode as any}
+                {...register("barcode")}
+              />
             </SimpleGrid>
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <FormControl>
@@ -78,7 +135,12 @@ export default function ProductCreate() {
                 </NumberInput>
               </FormControl>
 
-              <Input name="code" type="text" label="Código simples" />
+              <Input
+                {...register("code")}
+                error={errors.description as any}
+                type="text"
+                label="Código simples"
+              />
             </SimpleGrid>
           </VStack>
           <Flex mt="8" justify="flex-end">
@@ -88,7 +150,13 @@ export default function ProductCreate() {
                   Cancelar
                 </Button>
               </Link>
-              <Button colorScheme="orange">Salvar</Button>
+              <Button
+                type="submit"
+                colorScheme="orange"
+                isLoading={formState.isSubmitting}
+              >
+                Salvar
+              </Button>
             </HStack>
           </Flex>
         </Box>
