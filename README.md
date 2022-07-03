@@ -26,3 +26,10 @@
 - [X] Form de autenticação
 - [X] Validação de dados
 - [X] Form de criação de usuário
+
+## React Query
+- [X] Configurando o MirageJS
+- [X] Factories e Seeds
+- [ ] Configurando o ReactQuery
+- [ ] Listagem de produtos
+  
