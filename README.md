@@ -29,7 +29,7 @@
 
 ## React Query
 - [X] Configurando o MirageJS
-- [ ] Factories e Seeds
+- [X] Factories e Seeds
 - [ ] Configurando o ReactQuery
 - [ ] Listagem de produtos
   

@@ -18,6 +18,7 @@ import Sidebar from "../../components/Sidebar";
 import { RiAddLine } from "react-icons/ri";
 import Pagination from "../../components/Pagination";
 import Link from "next/link";
+import { useEffect } from "react";
 
 interface ProductProps {
   name: string;
@@ -88,6 +89,12 @@ const items: ProductProps[] = [
 ];
 
 export default function ProductsList() {
+  useEffect(() => {
+    fetch("https://localhost:3000/api/products")
+      .then((response) => response.json())
+      .then((data) => console.log(data));
+  }, []);
+
   return (
     <Box>
       <Header />
