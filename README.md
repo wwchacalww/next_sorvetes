@@ -36,7 +36,7 @@
 ## Construindo aplicação
 - [X] Sinalizando refetch dos dados
 - [X] Configurando o Axios
-- [ ] Criando hook de listagem
+- [X] Criando hook de listagem
 - [ ] Lógica de paginação
 - [ ] Componente de paginação
 - [ ] Trocando de página
