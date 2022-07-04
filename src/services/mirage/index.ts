@@ -6,7 +6,7 @@ type Product = {
   category: string;
   description: string;
   code: string;
-  barcode?: string;
+  barcode: string;
   createdAt: string;
 };
 
@@ -31,7 +31,7 @@ export function makeServer() {
           return faker.random.alphaNumeric(5);
         },
         barcode() {
-          faker.random.alphaNumeric(12);
+          return faker.random.alphaNumeric(12);
         },
         createdAt() {
           return faker.date.recent(10);
