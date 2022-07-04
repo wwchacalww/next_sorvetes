@@ -32,4 +32,14 @@
 - [X] Factories e Seeds
 - [X] Configurando o ReactQuery
 - [X] Listagem de produtos
-  
+
+## Construindo aplicação
+- [X] Sinalizando refetch dos dados
+- [X] Configurando o Axios
+- [ ] Criando hook de listagem
+- [ ] Lógica de paginação
+- [ ] Componente de paginação
+- [ ] Trocando de página
+- [ ] Prefetch de dados
+- [ ] Utilizando mutations
+- [ ] SSR no React Query

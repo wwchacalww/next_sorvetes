@@ -20,6 +20,7 @@ import { RiAddLine } from "react-icons/ri";
 import Pagination from "../../components/Pagination";
 import Link from "next/link";
 import { useQuery } from "react-query";
+import { api } from "../../services/api";
 interface ProductProps {
   name: string;
   description: string;
@@ -29,11 +30,10 @@ interface ProductProps {
 }
 
 export default function ProductsList() {
-  const { data, isLoading, error } = useQuery(
+  const { data, isLoading, error, isFetching } = useQuery(
     "products",
     async () => {
-      const response = await fetch("https://localhost:3000/api/products");
-      const data = await response.json();
+      const { data } = await api.get("products");
       return data.products.map((product: ProductProps) => {
         return {
           name: product.name,
@@ -59,6 +59,9 @@ export default function ProductsList() {
           <Flex justify="space-between" align="center">
             <Heading color="green.50" size="lg" fontWeight="normal">
               Produtos
+              {!isLoading && isFetching && (
+                <Spinner size="sm" ml="4" color="green.100" />
+              )}
             </Heading>
 
             <Link href="/products/create" passHref>
@@ -76,7 +79,7 @@ export default function ProductsList() {
           <Divider my="4" borderColor="green.700" />
           {isLoading ? (
             <Flex justify="center">
-              <Spinner />
+              <Spinner color="green.100" />
             </Flex>
           ) : error ? (
             <Flex justify="center">
