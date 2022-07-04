@@ -19,8 +19,7 @@ import Sidebar from "../../components/Sidebar";
 import { RiAddLine } from "react-icons/ri";
 import Pagination from "../../components/Pagination";
 import Link from "next/link";
-import { useQuery } from "react-query";
-import { api } from "../../services/api";
+import { useProducts } from "../../services/hooks/useProducts";
 interface ProductProps {
   name: string;
   description: string;
@@ -30,24 +29,7 @@ interface ProductProps {
 }
 
 export default function ProductsList() {
-  const { data, isLoading, error, isFetching } = useQuery(
-    "products",
-    async () => {
-      const { data } = await api.get("products");
-      return data.products.map((product: ProductProps) => {
-        return {
-          name: product.name,
-          description: product.description,
-          category: product.category,
-          barcode: product.barcode,
-          code: product.code,
-        };
-      });
-    },
-    {
-      staleTime: 1000 * 10,
-    }
-  );
+  const { data, isLoading, error, isFetching } = useProducts();
 
   return (
     <Box>
@@ -105,7 +87,7 @@ export default function ProductsList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data.map((item: ProductProps) => (
+                  {data?.map((item: ProductProps) => (
                     <Tr key={item.code}>
                       <Td w="340px">
                         <Box>
