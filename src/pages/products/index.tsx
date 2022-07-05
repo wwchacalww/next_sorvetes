@@ -20,6 +20,7 @@ import { RiAddLine } from "react-icons/ri";
 import Pagination from "../../components/Pagination";
 import Link from "next/link";
 import { useProducts } from "../../services/hooks/useProducts";
+import { useState } from "react";
 interface ProductProps {
   name: string;
   description: string;
@@ -29,7 +30,10 @@ interface ProductProps {
 }
 
 export default function ProductsList() {
-  const { data, isLoading, error, isFetching } = useProducts();
+  const [page, setPage] = useState(1);
+  const { data, isLoading, error, isFetching } = useProducts(page);
+
+  console.log(page);
 
   return (
     <Box>
@@ -87,7 +91,7 @@ export default function ProductsList() {
                   </Tr>
                 </Thead>
                 <Tbody>
-                  {data?.map((item: ProductProps) => (
+                  {data?.products.map((item: ProductProps) => (
                     <Tr key={item.code}>
                       <Td w="340px">
                         <Box>
@@ -102,7 +106,11 @@ export default function ProductsList() {
                   ))}
                 </Tbody>
               </Table>
-              <Pagination />
+              <Pagination
+                totalCountOfRegisters={data.totalCount}
+                currentPage={page}
+                onPageChange={setPage}
+              />
             </>
           )}
         </Box>
