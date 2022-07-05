@@ -37,9 +37,9 @@
 - [X] Sinalizando refetch dos dados
 - [X] Configurando o Axios
 - [X] Criando hook de listagem
-- [ ] Lógica de paginação
-- [ ] Componente de paginação
-- [ ] Trocando de página
+- [X] Lógica de paginação
+- [X] Componente de paginação
+- [X] Trocando de página
 - [ ] Prefetch de dados
 - [ ] Utilizando mutations
 - [ ] SSR no React Query
