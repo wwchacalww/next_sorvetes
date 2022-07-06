@@ -8,7 +8,7 @@ interface PaginationProps {
   onPageChange: (page: number) => void;
 }
 
-const siblingsCount = 2;
+const siblingsCount = 1;
 
 function generatePagesArray(from: number, to: number) {
   return [...new Array(to - from)]
@@ -31,7 +31,7 @@ export default function Pagination({
       ? generatePagesArray(currentPage - 1 - siblingsCount, currentPage - 1)
       : [];
 
-  const nextPage =
+  const nextPages =
     currentPage < lastPage
       ? generatePagesArray(
           currentPage,
@@ -42,7 +42,9 @@ export default function Pagination({
   return (
     <HStack spacing={6} mt="8" justify="space-between" align="center">
       <Box color="whiteAlpha.600">
-        <strong>1</strong> - <strong>10</strong> de <strong>100</strong>
+        <strong>{(currentPage - 1) * 10 + 1}</strong> -{" "}
+        <strong>{registersPerPage * currentPage}</strong> de{" "}
+        <strong>{totalCountOfRegisters}</strong>
       </Box>
 
       <HStack spacing="2">
@@ -73,8 +75,8 @@ export default function Pagination({
           isCurrent
         />
 
-        {nextPage.length > 0 &&
-          previusPage.map((page) => {
+        {nextPages.length > 0 &&
+          nextPages.map((page) => {
             return (
               <PaginationItem
                 onPageChange={onPageChange}

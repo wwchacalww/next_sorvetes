@@ -13,15 +13,19 @@ import {
   Tr,
   Td,
   Spinner,
+  Link,
 } from "@chakra-ui/react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import { RiAddLine } from "react-icons/ri";
 import Pagination from "../../components/Pagination";
-import Link from "next/link";
+import NextLink from "next/link";
 import { useProducts } from "../../services/hooks/useProducts";
 import { useState } from "react";
+import { api } from "../../services/api";
+import { queryClient } from "../../services/queryClient";
 interface ProductProps {
+  id: number;
   name: string;
   description: string;
   category: string;
@@ -33,8 +37,18 @@ export default function ProductsList() {
   const [page, setPage] = useState(1);
   const { data, isLoading, error, isFetching } = useProducts(page);
 
-  console.log(page);
-
+  async function handlePrefetchProduct(productId: number) {
+    await queryClient.prefetchQuery(
+      ["product", { id: productId }],
+      async () => {
+        const response = await api.get(`/products/${productId}`);
+        return response.data;
+      },
+      {
+        staleTime: 1000 * 60 * 10,
+      }
+    );
+  }
   return (
     <Box>
       <Header />
@@ -50,7 +64,7 @@ export default function ProductsList() {
               )}
             </Heading>
 
-            <Link href="/products/create" passHref>
+            <NextLink href="/products/create" passHref>
               <Button
                 as="a"
                 size="sm"
@@ -60,7 +74,7 @@ export default function ProductsList() {
               >
                 Criar novo
               </Button>
-            </Link>
+            </NextLink>
           </Flex>
           <Divider my="4" borderColor="green.700" />
           {isLoading ? (
@@ -95,7 +109,12 @@ export default function ProductsList() {
                     <Tr key={item.code}>
                       <Td w="340px">
                         <Box>
-                          <Text fontWeight="bold">{item.name}</Text>
+                          <Link
+                            color="white"
+                            onMouseEnter={() => handlePrefetchProduct(item.id)}
+                          >
+                            <Text fontWeight="bold">{item.name}</Text>
+                          </Link>
                           <Text fontSize="sm">{item.description}</Text>
                         </Box>
                       </Td>

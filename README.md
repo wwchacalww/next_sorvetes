@@ -40,6 +40,6 @@
 - [X] Lógica de paginação
 - [X] Componente de paginação
 - [X] Trocando de página
-- [ ] Prefetch de dados
+- [X] Prefetch de dados
 - [ ] Utilizando mutations
 - [ ] SSR no React Query
