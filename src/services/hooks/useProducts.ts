@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { api } from "../api";
 
 interface ProductProps {
-  id: string;
+  id: number;
   name: string;
   description: string;
   category: string;
@@ -26,6 +26,7 @@ export async function getProducts(page: number): Promise<GetProductsResponse> {
 
   const products = data.products.map((product: ProductProps) => {
     return {
+      id: product.id,
       name: product.name,
       description: product.description,
       category: product.category,
@@ -42,6 +43,6 @@ export async function getProducts(page: number): Promise<GetProductsResponse> {
 
 export function useProducts(page: number) {
   return useQuery(["products", page], () => getProducts(page), {
-    staleTime: 1000 * 10,
+    staleTime: 1000 * 60 * 10,
   });
 }

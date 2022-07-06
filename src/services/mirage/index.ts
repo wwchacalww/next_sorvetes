@@ -45,7 +45,7 @@ export function makeServer() {
 
     routes() {
       this.namespace = "api";
-      this.timing = 4000;
+      this.timing = 1000;
 
       this.get("/products", function (schema, request) {
         const { page = 1, per_page = 10 } = request.queryParams;
@@ -68,6 +68,8 @@ export function makeServer() {
           }
         );
       });
+
+      this.get("/products/:id");
       this.post("/products");
 
       this.namespace = "";
