@@ -41,5 +41,5 @@
 - [X] Componente de paginação
 - [X] Trocando de página
 - [X] Prefetch de dados
-- [ ] Utilizando mutations
+- [X] Utilizando mutations
 - [ ] SSR no React Query

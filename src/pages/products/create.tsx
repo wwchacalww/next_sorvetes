@@ -22,6 +22,10 @@ import * as yup from "yup";
 import { Input } from "../../components/Form/Input";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
+import { useMutation } from "react-query";
+import { api } from "../../services/api";
+import { queryClient } from "../../services/queryClient";
+import { useRouter } from "next/router";
 
 type CreateProductFormData = {
   name: string;
@@ -44,6 +48,26 @@ const createProductFormSchema = yup.object().shape({
 });
 
 export default function ProductCreate() {
+  const router = useRouter();
+
+  const createUser = useMutation(
+    async (product: CreateProductFormData) => {
+      const response = await api.post("products", {
+        product: {
+          ...product,
+          createdAt: new Date(),
+        },
+      });
+
+      return response.data.product;
+    },
+    {
+      onSuccess: () => {
+        queryClient.invalidateQueries("products");
+      },
+    }
+  );
+
   const { register, handleSubmit, formState } = useForm({
     resolver: yupResolver(createProductFormSchema),
   });
@@ -51,8 +75,8 @@ export default function ProductCreate() {
   const { errors } = formState;
 
   const handleCreate: SubmitHandler<CreateProductFormData> = async (values) => {
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-    console.log(values);
+    await createUser.mutateAsync(values);
+    router.push("/products");
   };
 
   return (
