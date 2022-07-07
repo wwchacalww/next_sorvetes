@@ -2,7 +2,7 @@ import { useQuery } from "react-query";
 import { api } from "../api";
 
 interface ProductProps {
-  id: number;
+  id: string;
   name: string;
   description: string;
   category: string;

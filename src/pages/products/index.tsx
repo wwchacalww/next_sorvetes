@@ -25,7 +25,7 @@ import { useState } from "react";
 import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
 interface ProductProps {
-  id: number;
+  id: string;
   name: string;
   description: string;
   category: string;
@@ -37,7 +37,7 @@ export default function ProductsList() {
   const [page, setPage] = useState(1);
   const { data, isLoading, error, isFetching } = useProducts(page);
 
-  async function handlePrefetchProduct(productId: number) {
+  async function handlePrefetchProduct(productId: string) {
     await queryClient.prefetchQuery(
       ["product", { id: productId }],
       async () => {
