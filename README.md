@@ -42,4 +42,12 @@
 - [X] Trocando de página
 - [X] Prefetch de dados
 - [X] Utilizando mutations
-- [ ] SSR no React Query
+
+## Autenticação com JWT
+- [X] Contexto da autenticação
+- [X] Salvando dados do usuário
+- [X] Salvando tokens nos cookies
+- [ ] Recuperando etado da autenticação
+- [ ] Realizando refresh do token
+- [ ] Fila de requisições no Axios
+- [ ] Realizando logout automático
