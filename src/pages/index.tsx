@@ -5,6 +5,8 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { Input } from "../components/Form/Input";
 import { useContext, useState } from "react";
 import { AuthContext } from "../contexts/AuthContext";
+import { GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
 
 type SignInFormData = {
   email: string;
@@ -27,7 +29,7 @@ function SignIn() {
 
   const { errors } = formState;
 
-  const handleSignIn: SubmitHandler<SignInFormData> = async (values: any) => {
+  const handleSignIn: SubmitHandler<SignInFormData> = async () => {
     const data = {
       email,
       password,
@@ -81,3 +83,19 @@ function SignIn() {
 }
 
 export default SignIn;
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const cookies = parseCookies(ctx);
+
+  if (cookies["hakuna.token"]) {
+    return {
+      redirect: {
+        destination: "/dashboard",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: {},
+  };
+};

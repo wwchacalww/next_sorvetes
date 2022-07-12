@@ -47,7 +47,14 @@
 - [X] Contexto da autenticação
 - [X] Salvando dados do usuário
 - [X] Salvando tokens nos cookies
-- [ ] Recuperando etado da autenticação
-- [ ] Realizando refresh do token
-- [ ] Fila de requisições no Axios
-- [ ] Realizando logout automático
+- [X] Recuperando etado da autenticação
+- [X] Realizando refresh do token
+- [X] Fila de requisições no Axios
+- [X] Realizando logout automático
+
+## Autenticação com SSR
+- [X] Recuperando token no server-side
+- [ ] Validando visitante
+- [ ] Validando autenticação(server)
+- [ ] Redirecionamento pelo servidor
+
