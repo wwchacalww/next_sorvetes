@@ -54,7 +54,7 @@
 
 ## Autenticação com SSR
 - [X] Recuperando token no server-side
-- [ ] Validando visitante
-- [ ] Validando autenticação(server)
+- [X] Validando visitante
+- [X] Validando autenticação(server)
 - [ ] Redirecionamento pelo servidor
 
