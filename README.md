@@ -56,5 +56,10 @@
 - [X] Recuperando token no server-side
 - [X] Validando visitante
 - [X] Validando autenticação(server)
-- [ ] Redirecionamento pelo servidor
+- [X] Redirecionamento pelo servidor
 
+## Controle de permissões
+- [X] Criando hook de permissão
+- [X] Criando componente de permissão
+- [X] Validando permissões (Server)
+- [X] Broadcast de logout

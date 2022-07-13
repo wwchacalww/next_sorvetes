@@ -23,9 +23,11 @@ import { Input } from "../../components/Form/Input";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
 import { useMutation } from "react-query";
-import { api } from "../../services/api";
 import { queryClient } from "../../services/queryClient";
 import { useRouter } from "next/router";
+import { api } from "../../services/apiClient";
+import { withSSRAuth } from "../../utils/withSSRAuth";
+import { setupAPIClient } from "../../services/api";
 
 type CreateProductFormData = {
   name: string;
@@ -188,3 +190,19 @@ export default function ProductCreate() {
     </Box>
   );
 }
+
+export const getServerSideProps = withSSRAuth(
+  async (ctx) => {
+    const apiClient = setupAPIClient(ctx);
+    const response = await apiClient.get("/me");
+
+    console.log(response.data);
+    return {
+      props: {},
+    };
+  },
+  {
+    permissions: ["users.create"],
+    roles: ["administrator"],
+  }
+);

@@ -1,5 +1,6 @@
-import { Flex, Avatar, Box, Text } from "@chakra-ui/react";
+import { Flex, Avatar, Box, Text, IconButton } from "@chakra-ui/react";
 import { useContext } from "react";
+import { FaSignOutAlt } from "react-icons/fa";
 import { AuthContext } from "../../contexts/AuthContext";
 
 interface ProfileProps {
@@ -7,7 +8,7 @@ interface ProfileProps {
 }
 
 export function Profile({ showProfileData = true }: ProfileProps) {
-  const { user } = useContext(AuthContext);
+  const { user, signOut } = useContext(AuthContext);
   return (
     <Flex align="center">
       {showProfileData && (
@@ -18,6 +19,14 @@ export function Profile({ showProfileData = true }: ProfileProps) {
           </Text>
         </Box>
       )}
+      <IconButton
+        variant="unstyled"
+        fontSize={24}
+        aria-label="SignOut"
+        icon={<FaSignOutAlt />}
+        onClick={signOut}
+      />
+
       <Avatar
         size="md"
         name="Hakuna Matata"
