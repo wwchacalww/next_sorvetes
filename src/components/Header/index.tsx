@@ -1,6 +1,7 @@
 import { Flex, Icon, IconButton, useBreakpointValue } from "@chakra-ui/react";
 import { RiMenuLine } from "react-icons/ri";
 import { useSidebarDrawer } from "../../contexts/SidebarDrawerContext";
+import { Can } from "../Can";
 import { Logo } from "./Logo";
 import { NotificationsNav } from "./NotificationsNav";
 import { Profile } from "./Profile";
@@ -35,7 +36,11 @@ export default function Header() {
       )}
       <Logo />
 
-      {isWideVersion && <SearchBox />}
+      {isWideVersion && (
+        <Can permissions={["metrics.list"]}>
+          <SearchBox />
+        </Can>
+      )}
 
       <NotificationsNav />
       <Profile showProfileData={isWideVersion} />

@@ -1,14 +1,16 @@
 import { Flex } from "@chakra-ui/react";
-import { redirect } from "next/dist/server/api-utils";
-import { destroyCookie } from "nookies";
 import { useEffect } from "react";
 import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import { setupAPIClient } from "../services/api";
 import { api } from "../services/apiClient";
+import { useCan } from "../services/hooks/useCan";
 import { withSSRAuth } from "../utils/withSSRAuth";
 
 export default function Dashboard() {
+  const userCanSeeMetrics = useCan({
+    roles: ["administrator"],
+  });
   useEffect(() => {
     api.get("/me").then((response) => console.log(response));
   }, []);
@@ -17,7 +19,8 @@ export default function Dashboard() {
       <Header />
 
       <Flex w="100%" maxW={1480} my="6" mx="auto" px="6">
-        <Sidebar />
+        {userCanSeeMetrics && <Sidebar />}
+        {/* <Sidebar /> */}
       </Flex>
     </Flex>
   );

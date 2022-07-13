@@ -19,22 +19,44 @@ type AuthProviderProps = {
 };
 
 type AuthContextData = {
-  signIn(credentials: SignInCredentials): Promise<void>;
+  signIn: (credentials: SignInCredentials) => Promise<void>;
+  signOut: () => void;
   isAuthenticated: boolean;
   user: User;
 };
 
 export const AuthContext = createContext({} as AuthContextData);
 
-export function signOut() {
+let authChannel: BroadcastChannel;
+
+export function signOut(broadCast: boolean = true) {
   destroyCookie(undefined, "hakuna.token");
   destroyCookie(undefined, "hakuna.refreshToken");
+
+  if (broadCast) {
+    authChannel.postMessage("signOut");
+  }
+
   Router.push("/");
 }
 
 export function AuthProvider({ children }: AuthProviderProps) {
   const [user, setUser] = useState<User>(null);
   const isAuthenticated = !!user;
+
+  useEffect(() => {
+    authChannel = new BroadcastChannel("auth");
+
+    authChannel.onmessage = (message) => {
+      switch (message.data) {
+        case "signOut":
+          signOut(false);
+          break;
+        default:
+          break;
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const { "hakuna.token": token } = parseCookies();
@@ -84,7 +106,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
     }
   }
   return (
-    <AuthContext.Provider value={{ signIn, isAuthenticated, user }}>
+    <AuthContext.Provider value={{ signIn, signOut, isAuthenticated, user }}>
       {children}
     </AuthContext.Provider>
   );
