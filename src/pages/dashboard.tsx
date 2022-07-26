@@ -11,8 +11,9 @@ export default function Dashboard() {
   const userCanSeeMetrics = useCan({
     roles: ["administrator"],
   });
+  console.log(userCanSeeMetrics);
   useEffect(() => {
-    api.get("/me").then((response) => console.log(response));
+    api.get("/users/me").then((response) => console.log(response));
   }, []);
   return (
     <Flex direction="column" h="100vh">
@@ -28,7 +29,7 @@ export default function Dashboard() {
 
 export const getServerSideProps = withSSRAuth(async (ctx) => {
   const apiClient = setupAPIClient(ctx);
-  const response = await apiClient.get("/me");
+  const response = await apiClient.get("/users/me");
 
   console.log(response.data);
   return {

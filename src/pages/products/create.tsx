@@ -194,9 +194,9 @@ export default function ProductCreate() {
 export const getServerSideProps = withSSRAuth(
   async (ctx) => {
     const apiClient = setupAPIClient(ctx);
-    const response = await apiClient.get("/me");
+    const response = await apiClient.get("/users/me");
 
-    console.log(response.data);
+    console.log("SSRAuth: ", response.data);
     return {
       props: {},
     };

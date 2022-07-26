@@ -33,6 +33,7 @@ export function withSSRAuth<P>(
 
     if (options) {
       const user = decode<{ permissions: string[]; roles: string[] }>(token);
+      console.log(user);
       const { permissions, roles } = options;
 
       const userHasValidPermissions = validateUserPermissions({
