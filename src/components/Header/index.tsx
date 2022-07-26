@@ -37,7 +37,7 @@ export default function Header() {
       <Logo />
 
       {isWideVersion && (
-        <Can permissions={["metrics.list"]}>
+        <Can permissions={["users.list"]}>
           <SearchBox />
         </Can>
       )}

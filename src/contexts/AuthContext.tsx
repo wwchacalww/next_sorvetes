@@ -63,7 +63,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
     if (token) {
       api
-        .get("/me")
+        .get("/users/me")
         .then((response) => {
           const { email, permissions, roles } = response.data;
 
@@ -77,7 +77,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
-      const response = await api.post("sessions", {
+      const response = await api.post("users/sessions", {
         email,
         password,
       });

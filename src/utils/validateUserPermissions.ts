@@ -14,22 +14,24 @@ export function validateUserPermissions({
   permissions,
   roles,
 }: validateUserPermissionsParams) {
-  if (permissions?.length > 0) {
-    const hasAllPermissions = permissions.every((permission) =>
-      user.permissions.includes(permission)
-    );
+  if (permissions && permissions.length > 0) {
+    console.log("permissions aqui:", permissions);
+    const hasAllPermissions = permissions.every((permission) => {
+      return user.permissions.includes(permission);
+    });
 
     if (!hasAllPermissions) {
       return false;
     }
-  }
+  } else if (roles && roles.length > 0) {
+    console.log("roles aqui:", roles.length);
 
-  if (roles?.length > 0) {
     const hasAllroles = roles.some((role) => user.roles.includes(role));
-
     if (!hasAllroles) {
       return false;
     }
+  } else {
+    return false;
   }
 
   return true;
