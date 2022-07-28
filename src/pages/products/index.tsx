@@ -17,12 +17,13 @@ import {
 } from "@chakra-ui/react";
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
-import { RiAddLine } from "react-icons/ri";
+import { RiAddLine, RiEditBoxLine } from "react-icons/ri";
 import Pagination from "../../components/Pagination";
 import NextLink from "next/link";
 import { useProducts } from "../../services/hooks/useProducts";
 import { useState } from "react";
-import { api } from "../../services/api";
+import { api } from "../../services/apiClient";
+
 import { queryClient } from "../../services/queryClient";
 interface ProductProps {
   id: string;
@@ -49,6 +50,7 @@ export default function ProductsList() {
       }
     );
   }
+
   return (
     <Box>
       <Header />
@@ -102,11 +104,12 @@ export default function ProductsList() {
                     <Th w={40} textAlign="center" color="whiteAlpha.800">
                       Código Simples
                     </Th>
+                    <Th w="1"></Th>
                   </Tr>
                 </Thead>
                 <Tbody>
                   {data?.products.map((item: ProductProps) => (
-                    <Tr key={item.code}>
+                    <Tr key={item.id}>
                       <Td w="340px">
                         <Box>
                           <Link
@@ -121,6 +124,11 @@ export default function ProductsList() {
                       <Td>{item.category}</Td>
                       <Td>{item.barcode}</Td>
                       <Td textAlign="center">{item.code}</Td>
+                      <Td>
+                        <Link href={`/products/edit/?id=${item.id}`}>
+                          <Icon as={RiEditBoxLine} />
+                        </Link>
+                      </Td>
                     </Tr>
                   ))}
                 </Tbody>

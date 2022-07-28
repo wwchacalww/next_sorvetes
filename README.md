@@ -63,3 +63,7 @@
 - [X] Criando componente de permissão
 - [X] Validando permissões (Server)
 - [X] Broadcast de logout
+
+## Possibilitar a edição de produtos
+-[X] Criar botões na lista de produtos
+-[X] Criar página de formulário de edição do produto

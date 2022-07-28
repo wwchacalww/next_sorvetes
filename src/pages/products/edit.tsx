@@ -5,15 +5,10 @@ import {
   VStack,
   SimpleGrid,
   Box,
-  NumberDecrementStepper,
-  NumberIncrementStepper,
-  NumberInput,
-  NumberInputField,
-  NumberInputStepper,
-  FormControl,
-  FormLabel,
   Button,
   HStack,
+  Checkbox,
+  Text,
 } from "@chakra-ui/react";
 import Link from "next/link";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -28,17 +23,18 @@ import { useRouter } from "next/router";
 import { api } from "../../services/apiClient";
 import { withSSRAuth } from "../../utils/withSSRAuth";
 import { setupAPIClient } from "../../services/api";
+import { useProduct } from "../../services/hooks/useProduct";
 
-type CreateProductFormData = {
+type UpdateProductFormData = {
+  id: string;
   name: string;
   category: string;
   description: string;
   barcode?: string;
   code: string;
-  price: number;
 };
 
-const editProductFormSchema = yup.object().shape({
+const updateProductFormSchema = yup.object().shape({
   name: yup.string().required("Nome do produto é obrigatório"),
   category: yup.string().required("Tipo do produto é obrigatória"),
   description: yup.string().required("Descrição do produto é obrigatória"),
@@ -49,12 +45,17 @@ const editProductFormSchema = yup.object().shape({
     .required("Código do produto é obrigatório"),
 });
 
-export default function ProductCreate() {
+export default function ProductEdit() {
   const router = useRouter();
 
-  const editProduct = useMutation(
-    async (product: CreateProductFormData) => {
+  const { id } = router.query;
+
+  const { data } = useProduct(id as string);
+
+  const updateUser = useMutation(
+    async (product: UpdateProductFormData) => {
       const response = await api.put("products", {
+        id,
         ...product,
       });
 
@@ -68,13 +69,13 @@ export default function ProductCreate() {
   );
 
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(editProductFormSchema),
+    resolver: yupResolver(updateProductFormSchema),
   });
 
   const { errors } = formState;
 
-  const handleUpdate: SubmitHandler<CreateProductFormData> = async (values) => {
-    await editProduct.mutateAsync(values);
+  const handleUpdate: SubmitHandler<UpdateProductFormData> = async (values) => {
+    await updateUser.mutateAsync(values);
     router.push("/products");
   };
 
@@ -90,11 +91,11 @@ export default function ProductCreate() {
           bg="green.900"
           p={["6", "8"]}
           borderRadius="8"
-          onSubmit={handleSubmit(handleCreate as any)}
+          onSubmit={handleSubmit(handleUpdate as any)}
         >
           <Flex justify="space-between" align="center">
             <Heading color="green.50" size="lg" fontWeight="normal">
-              Novo Produto
+              Editar Produto
             </Heading>
           </Flex>
           <Divider my="4" borderColor="green.700" />
@@ -102,16 +103,18 @@ export default function ProductCreate() {
           <VStack spacing={["6", "8"]}>
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
               <Input
-                type="text"
                 label="Nome do Produto"
-                error={errors.name as any}
+                type="text"
+                error={errors.email as any}
                 {...register("name")}
+                defaultValue={data?.name}
               />
               <Input
-                type="text"
                 label="Tipo do Produto"
+                type="text"
                 error={errors.category as any}
                 {...register("category")}
+                defaultValue={data?.category}
               />
             </SimpleGrid>
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
@@ -120,50 +123,27 @@ export default function ProductCreate() {
                 label="Descrição do Produto"
                 error={errors.description as any}
                 {...register("description")}
+                value={data?.description}
               />
               <Input
                 type="text"
                 label="Código de barra"
                 error={errors.barcode as any}
                 {...register("barcode")}
+                defaultValue={data?.barcode}
               />
             </SimpleGrid>
             <SimpleGrid minChildWidth="240px" spacing={["6", "8"]} w="100%">
-              <FormControl>
-                <FormLabel htmlFor="price" color="white">
-                  Preço
-                </FormLabel>
-                <NumberInput
-                  defaultValue={0}
-                  precision={2}
-                  step={0.2}
-                  focusBorderColor="purple.500"
-                  bg="green.50"
-                  variant="filled"
-                  color="green.700"
-                  _hover={{
-                    bgColor: "green.50",
-                  }}
-                  _focus={{
-                    bgColor: "green.50",
-                  }}
-                  name="price"
-                  rounded={8}
-                >
-                  <NumberInputField bg="green.50" />
-                  <NumberInputStepper>
-                    <NumberIncrementStepper />
-                    <NumberDecrementStepper />
-                  </NumberInputStepper>
-                </NumberInput>
-              </FormControl>
-
               <Input
                 {...register("code")}
                 error={errors.description as any}
                 type="text"
                 label="Código simples"
+                defaultValue={data?.code}
               />
+              <Checkbox isChecked={data?.isActive}>
+                <Text color="white">Produto em estoque?</Text>
+              </Checkbox>
             </SimpleGrid>
           </VStack>
           <Flex mt="8" justify="flex-end">
