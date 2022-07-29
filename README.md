@@ -65,5 +65,7 @@
 - [X] Broadcast de logout
 
 ## Possibilitar a edição de produtos
--[X] Criar botões na lista de produtos
--[X] Criar página de formulário de edição do produto
+- [X] Criar botões na lista de produtos
+- [X] Criar página de formulário de edição do produto
+- [X] Criar botões na lista de produtos para 💵 colocar preço nos produtos
+- [X] Criar modal com formulário de preço
