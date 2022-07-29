@@ -38,7 +38,7 @@ type CreateProductFormData = {
   price: number;
 };
 
-const editProductFormSchema = yup.object().shape({
+const createProductFormSchema = yup.object().shape({
   name: yup.string().required("Nome do produto é obrigatório"),
   category: yup.string().required("Tipo do produto é obrigatória"),
   description: yup.string().required("Descrição do produto é obrigatória"),
@@ -52,9 +52,9 @@ const editProductFormSchema = yup.object().shape({
 export default function ProductCreate() {
   const router = useRouter();
 
-  const editProduct = useMutation(
+  const createProduct = useMutation(
     async (product: CreateProductFormData) => {
-      const response = await api.put("products", {
+      const response = await api.post("products", {
         ...product,
       });
 
@@ -68,13 +68,13 @@ export default function ProductCreate() {
   );
 
   const { register, handleSubmit, formState } = useForm({
-    resolver: yupResolver(editProductFormSchema),
+    resolver: yupResolver(createProductFormSchema),
   });
 
   const { errors } = formState;
 
-  const handleUpdate: SubmitHandler<CreateProductFormData> = async (values) => {
-    await editProduct.mutateAsync(values);
+  const handleCreate: SubmitHandler<CreateProductFormData> = async (values) => {
+    await createProduct.mutateAsync(values);
     router.push("/products");
   };
 

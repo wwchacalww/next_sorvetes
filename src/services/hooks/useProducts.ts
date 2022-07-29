@@ -8,6 +8,7 @@ interface ProductProps {
   category: string;
   barcode?: string;
   code: string;
+  price: number;
 }
 
 type GetProductsResponse = {
@@ -32,6 +33,7 @@ export async function getProducts(page: number): Promise<GetProductsResponse> {
       category: product.category,
       barcode: product.barcode,
       code: product.code,
+      price: product.price,
     };
   });
 
